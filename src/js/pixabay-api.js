@@ -1,16 +1,14 @@
 import axios from "axios";
 import { value } from '../main.js';
 
-const searchValue = document.getElementById('search').value;
 
-
-export async function getPhotoBySearch(searchValue) {
+export async function getPhotoBySearch(value) {
     try {
         const KEY = '42424645-ecd3f1048329df1dec069e6a8';
         const response = await axios.get('https://pixabay.com/api/', {
             params: {
                 key: KEY,
-                q: searchValue,
+                q: value,
                 image_type: 'photo',
                 orientation: 'horizontal',
                 safesearch: 'true',
@@ -37,7 +35,7 @@ export async function fetchMoreImages(value) {
     try {
         const params = new URLSearchParams({
             key: '42424645-ecd3f1048329df1dec069e6a8',
-            q: searchValue,
+            q: value,
             image_type: 'photo',
             orientation: 'horizontal',
             safesearch: 'true',
