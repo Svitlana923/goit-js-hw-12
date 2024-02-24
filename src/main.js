@@ -11,7 +11,7 @@ const galleryEl = document.querySelector('.gallery-o');
 const loaderElem = document.querySelector('.loader');
 const loaderElem2 = document.querySelector('.more-loader');
 const loadMoreBtn = document.querySelector('.more-btn');
-export const value = formElem.querySelector('.input-search').value;
+export const value = document.querySelector('.input-search').value;
 
 document.addEventListener('DOMContentLoaded', () => {
 
