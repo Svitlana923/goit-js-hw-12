@@ -9,7 +9,7 @@ import { fetchMoreImages } from './js/pixabay-api.js';
 const formElem = document.querySelector('.search-form');
 const galleryEl = document.querySelector('.gallery-o');
 const loaderElem = document.querySelector('.loader');
-const loaderElem2 = document.querySelector('.more-loader');
+const loaderElem2 = document.querySelector('.loader2');
 const loadMoreBtn = document.querySelector('.more-btn');
 export let value;
 export let page;
@@ -36,21 +36,22 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (error) {
         renderError(error);
     } finally {
-        hideLoader();
+       hideLoader();
         checkBtnVisibleStatus();
     }
-}
+        
+    }
+})
 
     function renderError(error) {
         galleryEl.innerHTML = '';
         iziToast.show({
-            message: `❌ "${error.message}". Please try again!`,
+            message: `❌ "${error}". Please try again!`,
             color: 'red',
             position: 'topRight',
             maxWidth: '400px',
         });
-    }
-});
+    };
 
 function showLoader() {
     loaderElem.style.display = 'block';
@@ -59,30 +60,31 @@ function showLoader() {
 function hideLoader() {
     loaderElem.style.display = 'none';
 }
-
 function showLoader2() {
- loaderElem2.classList.remove('hidden');
+    loaderElem2.classList.remove('hidden');
 }
 
 function hideLoader2() {
-loaderElem2.classList.add('hidden');
+    loaderElem2.classList.add('hidden');
 }
 
-
 loadMoreBtn.addEventListener("click", async () => {
-  try {
-    const images = await fetchMoreImages(value, page);
-      renderMoreImages(images);
+    showLoader2();
+    try {
+        const images = await fetchMoreImages(value, page);
+    
+        renderMoreImages(images);
+        page += 1;
       
-    page += 1;
-      
-    if (page > 1) {
-  checkBtnVisibleStatus();
+        if (page > 1) {
+            hideLoader2();
+            checkBtnVisibleStatus();
+        };
+
+        }catch (error) {
+            console.log(error);
     }
-  }catch(error) {
-      console.log(error);
-    }
-});
+    });
 
 
 function showMoreLoadBtn() {
