@@ -53,8 +53,9 @@ export function renderImages(array) {
 }
 
 
-export function renderMoreImages(images, galleryEl, formElem) {
-    const markup = images
+export function renderMoreImages(images) {
+    const hitsArray = images['hits'];
+    const markup = hitsArray
         .map(
     ({ largeImageURL,
         webformatURL,
@@ -85,4 +86,10 @@ export function renderMoreImages(images, galleryEl, formElem) {
     lightbox.on('show.simplelightbox');
     lightbox.refresh();
     formElem.reset();
+    
+    const height = galleryEl.firstElementChild.getBoundingClientRect().height;
+    scrollBy({
+        behavior: 'smooth',
+        top: height * 2,
+    })
 }

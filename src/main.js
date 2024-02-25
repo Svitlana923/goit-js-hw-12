@@ -60,30 +60,28 @@ function hideLoader() {
     loaderElem.style.display = 'none';
 }
 
-//function showLoader2() {
-//    loaderElem2.classList.remove('hidden');
-//}
+function showLoader2() {
+ loaderElem2.classList.remove('hidden');
+}
 
-//function hideLoader2() {
-  //  loaderElem2.classList.add('hidden');
-//}
+function hideLoader2() {
+loaderElem2.classList.add('hidden');
+}
 
 
 loadMoreBtn.addEventListener("click", async () => {
-//    showLoader2();
   try {
     const images = await fetchMoreImages(value, page);
       renderMoreImages(images);
       
     page += 1;
-      checkBtnVisibleStatus();
+      
     if (page > 1) {
-  
+  checkBtnVisibleStatus();
     }
   }catch(error) {
-    console.log(error);
+      console.log(error);
     }
-   // hideLoader2();
 });
 
 
@@ -96,7 +94,8 @@ function hideMoreLoadBtn() {
 
 function checkBtnVisibleStatus() {
   if (page >= maxPage) {
-    hideMoreLoadBtn();
+      hideMoreLoadBtn();
+  
   } else {
     showMoreLoadBtn();
   }
