@@ -11,7 +11,9 @@ const galleryEl = document.querySelector('.gallery-o');
 const loaderElem = document.querySelector('.loader');
 const loaderElem2 = document.querySelector('.more-loader');
 const loadMoreBtn = document.querySelector('.more-btn');
-export const value = document.querySelector('.input-search').value;
+export let value;
+export let page;
+let maxPage;
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -20,23 +22,24 @@ document.addEventListener('DOMContentLoaded', () => {
     formElem.addEventListener('submit', onSubmit);
 
 
-    function onSubmit(e) {
-        e.preventDefault();
-        showLoader();
-        galleryEl.innerHTML = '';
-        
-        
-        getPhotoBySearch(value)
-            .then(data => {
-                renderImages(data.hits);
-            })
-            .catch(error => {
-                renderError(error);
-            })
-            .finally(() => {
-                hideLoader();
-            });
+   async function onSubmit(e) {
+    e.preventDefault();
+    showLoader();
+    galleryEl.innerHTML = '';
+    page = 1;
+    value = formElem.querySelector('.input-search').value;
+
+    try {
+        const data = await getPhotoBySearch(value, page);
+        renderImages(data.hits);
+        maxPage = Math.ceil(data.totalHits / 15);
+    } catch (error) {
+        renderError(error);
+    } finally {
+        hideLoader();
+        checkBtnVisibleStatus();
     }
+}
 
     function renderError(error) {
         galleryEl.innerHTML = '';
@@ -57,18 +60,44 @@ function hideLoader() {
     loaderElem.style.display = 'none';
 }
 
-let page = 1;
+//function showLoader2() {
+//    loaderElem2.classList.remove('hidden');
+//}
+
+//function hideLoader2() {
+  //  loaderElem2.classList.add('hidden');
+//}
+
 
 loadMoreBtn.addEventListener("click", async () => {
+//    showLoader2();
   try {
-    const images = await fetchMoreImages(value);
-    renderMoreImages();
+    const images = await fetchMoreImages(value, page);
+      renderMoreImages(images);
+      
     page += 1;
-
+      checkBtnVisibleStatus();
     if (page > 1) {
   
     }
   }catch(error) {
     console.log(error);
-  }
+    }
+   // hideLoader2();
 });
+
+
+function showMoreLoadBtn() {
+  loadMoreBtn.classList.remove('hidden');
+}
+function hideMoreLoadBtn() {
+  loadMoreBtn.classList.add('hidden');
+}
+
+function checkBtnVisibleStatus() {
+  if (page >= maxPage) {
+    hideMoreLoadBtn();
+  } else {
+    showMoreLoadBtn();
+  }
+}

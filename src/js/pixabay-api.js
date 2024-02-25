@@ -1,8 +1,10 @@
 import axios from "axios";
+
 import { value } from '../main.js';
+import { page } from '../main.js';
 
 
-export async function getPhotoBySearch(value) {
+export async function getPhotoBySearch(value, currentPage) {
     try {
         const KEY = '42424645-ecd3f1048329df1dec069e6a8';
         const response = await axios.get('https://pixabay.com/api/', {
@@ -12,7 +14,7 @@ export async function getPhotoBySearch(value) {
                 image_type: 'photo',
                 orientation: 'horizontal',
                 safesearch: 'true',
-                page: '1',
+                page: currentPage,
                 per_page: '15'
             }
         });
@@ -27,11 +29,8 @@ export async function getPhotoBySearch(value) {
     }
 }
 
-let page = 1;
-let perPage = 15;
 
-
-export async function fetchMoreImages(value) {
+export async function fetchMoreImages(value, currentPage) {
     try {
         const params = new URLSearchParams({
             key: '42424645-ecd3f1048329df1dec069e6a8',
@@ -39,18 +38,18 @@ export async function fetchMoreImages(value) {
             image_type: 'photo',
             orientation: 'horizontal',
             safesearch: 'true',
-            _limit: perPage,
-            _page: page
+            per_page: '15',
+            page: currentPage
         });
 
-      const response = await axios.get(
+      let images = await axios.get(
             `https://pixabay.com/api/?${params}`
         );
-        if (response.data.total === 0) {
+        if (images.data.total === 0) {
             throw new Error('No images found');
         }
 
-        return response.data;
+        return images.data;
     } catch (error) {
         throw error;
     }

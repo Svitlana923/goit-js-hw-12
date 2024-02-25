@@ -7,6 +7,7 @@ const formElem = document.querySelector('.search-form');
 const lightbox = new SimpleLightbox('.gallery-o');
 
 
+
 const options = {
   captions: true,
   captionSelector: 'img',
@@ -52,17 +53,16 @@ export function renderImages(array) {
 }
 
 
-export function renderMoreImages(array) {
-const markup = array
-.map(
-    ({
-            largeImageURL,
-            webformatURL,
-            tags,
-            likes,
-            views,
-            comments,
-            downloads,
+export function renderMoreImages(images, galleryEl, formElem) {
+    const markup = images
+        .map(
+    ({ largeImageURL,
+        webformatURL,
+        tags,
+        likes,
+        views,
+        comments,
+        downloads,
         }) => {
             return `
         <div class="gallery">
