@@ -1,26 +1,26 @@
-import{S as f,a as g,i as x}from"./assets/vendor-5401a4b0.js";(function(){const s=document.createElement("link").relList;if(s&&s.supports&&s.supports("modulepreload"))return;for(const t of document.querySelectorAll('link[rel="modulepreload"]'))n(t);new MutationObserver(t=>{for(const r of t)if(r.type==="childList")for(const a of r.addedNodes)a.tagName==="LINK"&&a.rel==="modulepreload"&&n(a)}).observe(document,{childList:!0,subtree:!0});function e(t){const r={};return t.integrity&&(r.integrity=t.integrity),t.referrerPolicy&&(r.referrerPolicy=t.referrerPolicy),t.crossOrigin==="use-credentials"?r.credentials="include":t.crossOrigin==="anonymous"?r.credentials="omit":r.credentials="same-origin",r}function n(t){if(t.ep)return;t.ep=!0;const r=e(t);fetch(t.href,r)}})();const m=document.querySelector(".gallery-o"),w=document.querySelector(".search-form");new f(".gallery-o");const L={captions:!0,captionSelector:"img",captionType:"attr",captionsData:"alt",captionPosition:"bottom",animation:250};function P(o){const s=o.map(({largeImageURL:n,webformatURL:t,tags:r,likes:a,views:c,comments:l,downloads:d})=>`
-        <div class="gallery">
-            <a href="${n}">
-            <img src="${t}" alt="${r}" title="${r}" width="380" height="220" />
-            <ul class="info-cards-container">
-                <li class="info-cards-elements">likes<span>${a}</span></li>
-                <li class="info-cards-elements">views<span>${c}</span></li>
-                <li class="info-cards-elements">comments<span>${l}</span></li>
-                <li class="info-cards-elements">downloads<span>${d}</span></li>
-            </ul>
-            </a>
-        </div>
-        `).join("");m.innerHTML=s;const e=new f(".gallery-o a",L);e.on("show.simplelightbox"),e.refresh(),w.reset()}function B(o){const e=o.hits.map(({largeImageURL:r,webformatURL:a,tags:c,likes:l,views:d,comments:M,downloads:q})=>`
+import{S as h,a as P,i as w}from"./assets/vendor-5401a4b0.js";(function(){const n=document.createElement("link").relList;if(n&&n.supports&&n.supports("modulepreload"))return;for(const e of document.querySelectorAll('link[rel="modulepreload"]'))r(e);new MutationObserver(e=>{for(const t of e)if(t.type==="childList")for(const i of t.addedNodes)i.tagName==="LINK"&&i.rel==="modulepreload"&&r(i)}).observe(document,{childList:!0,subtree:!0});function o(e){const t={};return e.integrity&&(t.integrity=e.integrity),e.referrerPolicy&&(t.referrerPolicy=e.referrerPolicy),e.crossOrigin==="use-credentials"?t.credentials="include":e.crossOrigin==="anonymous"?t.credentials="omit":t.credentials="same-origin",t}function r(e){if(e.ep)return;e.ep=!0;const t=o(e);fetch(e.href,t)}})();const m=document.querySelector(".gallery-o"),v=document.querySelector(".search-form");new h(".gallery-o");const $={captions:!0,captionSelector:"img",captionType:"attr",captionsData:"alt",captionPosition:"bottom",animation:250};function B(s){const n=s.map(({largeImageURL:r,webformatURL:e,tags:t,likes:i,views:l,comments:d,downloads:u})=>`
         <div class="gallery">
             <a href="${r}">
-            <img src="${a}" alt="${c}" title="${c}" width="380" height="220" />
+            <img src="${e}" alt="${t}" title="${t}" width="380" height="220" />
             <ul class="info-cards-container">
-                <li class="info-cards-elements">likes<span>${l}</span></li>
-                <li class="info-cards-elements">views<span>${d}</span></li>
-                <li class="info-cards-elements">comments<span>${M}</span></li>
-                <li class="info-cards-elements">downloads<span>${q}</span></li>
+                <li class="info-cards-elements">likes<span>${i}</span></li>
+                <li class="info-cards-elements">views<span>${l}</span></li>
+                <li class="info-cards-elements">comments<span>${d}</span></li>
+                <li class="info-cards-elements">downloads<span>${u}</span></li>
             </ul>
             </a>
         </div>
-        `).join("");m.insertAdjacentHTML("beforeend",e);const n=new f(".gallery-o a",L);n.on("show.simplelightbox"),n.refresh(),w.reset();const t=m.firstElementChild.getBoundingClientRect().height;scrollBy({behavior:"smooth",top:t*2})}async function O(o,s){try{const e="42424645-ecd3f1048329df1dec069e6a8",n=await g.get("https://pixabay.com/api/",{params:{key:e,q:o,image_type:"photo",orientation:"horizontal",safesearch:"true",page:s,per_page:"15"}});if(n.data.total===0)throw new Error("No images found");return n.data}catch(e){throw e}}async function T(o,s){try{const e=new URLSearchParams({key:"42424645-ecd3f1048329df1dec069e6a8",q:o,image_type:"photo",orientation:"horizontal",safesearch:"true",per_page:"15",page:s});let n=await g.get(`https://pixabay.com/api/?${e}`);if(n.data.total===0)throw new Error("No images found");return n.data}catch(e){throw e}}const h=document.querySelector(".search-form"),$=document.querySelector(".gallery-o"),b=document.querySelector(".loader"),v=document.querySelector(".loader2"),p=document.querySelector(".more-btn");let u,i,S;document.addEventListener("DOMContentLoaded",()=>{y(),h.addEventListener("submit",o);async function o(s){s.preventDefault(),N(),$.innerHTML="",i=1,u=h.querySelector(".input-search").value;try{const e=await O(u,i);P(e.hits),S=Math.ceil(e.totalHits/15)}catch(e){H(e)}finally{y(),E()}}});function H(o){$.innerHTML="",x.show({message:`❌ "${o}". Please try again!`,color:"red",position:"topRight",maxWidth:"400px"})}function N(){b.style.display="block"}function y(){b.style.display="none"}function k(){v.classList.remove("hidden")}function A(){v.classList.add("hidden")}p.addEventListener("click",async()=>{k();try{const o=await T(u,i);B(o),i+=1,i>1&&(A(),E())}catch(o){console.log(o)}});function I(){p.classList.remove("hidden")}function _(){p.classList.add("hidden")}function E(){i>=S?_():I()}
+        `).join("");m.innerHTML=n;const o=new h(".gallery-o a",$);o.on("show.simplelightbox"),o.refresh(),v.reset()}function T(s){const o=s.hits.map(({largeImageURL:t,webformatURL:i,tags:l,likes:d,views:u,comments:q,downloads:O})=>`
+        <div class="gallery">
+            <a href="${t}">
+            <img src="${i}" alt="${l}" title="${l}" width="380" height="220" />
+            <ul class="info-cards-container">
+                <li class="info-cards-elements">likes<span>${d}</span></li>
+                <li class="info-cards-elements">views<span>${u}</span></li>
+                <li class="info-cards-elements">comments<span>${q}</span></li>
+                <li class="info-cards-elements">downloads<span>${O}</span></li>
+            </ul>
+            </a>
+        </div>
+        `).join("");m.insertAdjacentHTML("beforeend",o);const r=new h(".gallery-o a",$);r.on("show.simplelightbox"),r.refresh(),v.reset();const e=m.firstElementChild.getBoundingClientRect().height;scrollBy({behavior:"smooth",top:e*2})}async function b(s,n){try{const o="42424645-ecd3f1048329df1dec069e6a8",r=await P.get("https://pixabay.com/api/",{params:{key:o,q:s,image_type:"photo",orientation:"horizontal",safesearch:"true",page:n,per_page:"15"}});if(r.data.total===0)throw new Error("No images found");return r.data}catch(o){throw o}}const g=document.querySelector(".search-form"),E=document.querySelector(".gallery-o"),S=document.querySelector(".loader"),x=document.querySelector(".loader2"),c=document.querySelector(".more-btn");let f,a,p;document.addEventListener("DOMContentLoaded",()=>{L(),g.addEventListener("submit",s);async function s(n){n.preventDefault(),k(),E.innerHTML="",a=1,f=g.querySelector(".input-search").value;try{const o=await b(f,a);B(o.hits),p=Math.ceil(o.totalHits/15)}catch(o){H(o)}finally{L(),y()}}});function H(s){E.innerHTML="",w.show({message:`❌ "${s}". Please try again!`,color:"red",position:"topRight",maxWidth:"400px"})}function k(){S.style.display="block"}function L(){S.style.display="none"}function A(){x.classList.remove("hidden")}function M(){x.classList.add("hidden")}c.addEventListener("click",async()=>{a+=1,A();try{const s=await b(f,a);T(s),a>1&&(M(),y())}catch(s){console.log(s)}});function C(){a===p&&(M(),y(),w.show({message:`❌ "We're sorry, but you've reached the end of search results."`,color:"red",position:"topRight",maxWidth:"400px"}))}c.addEventListener("click",C);function N(){c.classList.remove("hidden")}function j(){c.classList.add("hidden")}function y(){a>=p?j():N()}
 //# sourceMappingURL=commonHelpers.js.map
