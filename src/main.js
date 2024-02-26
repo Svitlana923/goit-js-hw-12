@@ -22,13 +22,12 @@ document.addEventListener('DOMContentLoaded', () => {
     formElem.addEventListener('submit', onSubmit);
 
 
-   async function onSubmit(e) {
+    async function onSubmit(e) {
     e.preventDefault();
     showLoader();
     galleryEl.innerHTML = '';
     page = 1;
     value = formElem.querySelector('.input-search').value;
-
     try {
         const data = await getPhotoBySearch(value, page);
         renderImages(data.hits);
@@ -36,16 +35,16 @@ document.addEventListener('DOMContentLoaded', () => {
     
     } catch (error) {
         renderError(error);
-        
+         
     } finally {
         hideLoader();
-        checkBtnVisibleStatus();
-    }
-        
+        checkBtnVisibleStatus(); 
+    }   
     }
 })
 
     function renderError(error) {
+    checkBtnVisibleStatus() 
         galleryEl.innerHTML = '';
         iziToast.show({
             message: `❌ "${error}". Please try again!`,
@@ -90,13 +89,14 @@ loadMoreBtn.addEventListener("click", async () => {
 function endOfCollection () {
     if (page === maxPage) {
         hideLoader2();
-        checkBtnVisibleStatus();
+        hideMoreLoadBtn();
         iziToast.show({
             message: `❌ "We're sorry, but you've reached the end of search results."`,
             color: 'red',
             position: 'topRight',
             maxWidth: '400px',
         });
+    
     }
 }
 
